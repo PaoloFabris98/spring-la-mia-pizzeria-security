@@ -18,17 +18,17 @@
                     <h6 class="navbar-links m-0 me-3">
                         <a th:href="@{'/contatti'}" class="text-white">Contatti</a>
                     </h6>
-                    <h6 class="navbar-links m-0 me-3">
-                        <a th:href="@{'/creaPizza'}" class="text-white" sec:authorize="hasAuthority('ADMIN')">Aggiungi Pizza</a>
+                    <h6 class="navbar-links m-0 me-3" sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{'/creaPizza'}" class="text-white">Aggiungi Pizza</a>
                     </h6>
-                    <h6 class="navbar-links m-0 me-3">
-                        <a th:href="@{'/creaIngrediente'}" class="text-white" sec:authorize="hasAuthority('ADMIN')">Aggiungi Ingrediente</a>
+                    <h6 class="navbar-links m-0 me-3" sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{'/creaIngrediente'}" class="text-white">Aggiungi Ingrediente</a>
                     </h6>
                     <h6 class="navbar-links m-0 me-3">
                         <a th:href="@{'/vediIngredienti'}" class="text-white">Ingredienti</a>
                     </h6>
-                    <h6 class="navbar-links m-0 me-3">
-                        <a th:href="@{'/creaAllergene'}" class="text-white" sec:authorize="hasAuthority('ADMIN')">Crea Allergene</a>
+                    <h6 class="navbar-links m-0 me-3" sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{'/creaAllergene'}" class="text-white">Crea Allergene</a>
                     </h6>
                     <h6 class="navbar-links m-0 me-3">
                         <a th:href="@{'/allergeni'}" class="text-white">Allergeni</a>
