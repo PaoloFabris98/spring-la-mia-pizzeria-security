@@ -11,33 +11,34 @@
     <th:block th:fragment="navBar">
         <div class="navbar text-white m-1 p-2 rounded">
             <div class="row align-items-center w-100">
-                <div class="col-md-6 d-flex align-items-center">
+                <div class="col-md-8 d-flex align-items-center">
                     <h4 class="m-0 me-3">
                         <a th:href="@{'/'}" class="text-white">La Mia Pizzeria</a>
                     </h4>
-                    <div class="navbar-links m-0 me-3">
+                    <h6 class="navbar-links m-0 me-3">
                         <a th:href="@{'/contatti'}" class="text-white">Contatti</a>
-                    </div>
-                    <div class="navbar-links m-0 me-3">
-                        <a th:href="@{'/creaPizza'}" class="text-white">Aggiungi Pizza</a>
-                    </div>
-                    <div class="navbar-links m-0 me-3">
-                        <a th:href="@{'/creaIngrediente'}" class="text-white">Aggiungi Ingrediente</a>
-                    </div>
-                    <div class="navbar-links m-0 me-3">
+                    </h6>
+                    <h6 class="navbar-links m-0 me-3">
+                        <a th:href="@{'/creaPizza'}" class="text-white" sec:authorize="hasAuthority('ADMIN')">Aggiungi Pizza</a>
+                    </h6>
+                    <h6 class="navbar-links m-0 me-3">
+                        <a th:href="@{'/creaIngrediente'}" class="text-white" sec:authorize="hasAuthority('ADMIN')">Aggiungi Ingrediente</a>
+                    </h6>
+                    <h6 class="navbar-links m-0 me-3">
                         <a th:href="@{'/vediIngredienti'}" class="text-white">Ingredienti</a>
-                    </div>
-                    <div class="navbar-links m-0 me-3">
-                        <a th:href="@{'/creaAllergene'}" class="text-white">Crea Allergene</a>
-                    </div>
-                    <div class="navbar-links m-0 me-3">
+                    </h6>
+                    <h6 class="navbar-links m-0 me-3">
+                        <a th:href="@{'/creaAllergene'}" class="text-white" sec:authorize="hasAuthority('ADMIN')">Crea Allergene</a>
+                    </h6>
+                    <h6 class="navbar-links m-0 me-3">
                         <a th:href="@{'/allergeni'}" class="text-white">Allergeni</a>
-                    </div>
+                    </h6>
                 </div>
                 
-                <div class="col-md-6">
-                    <form class="d-flex justify-content-end" th:action="@{/searchPizza}" method="GET">
-                        <div class="input-group w-75">
+                <div class="col-md-4 d-flex align-items-center justify-content-end gap-3">
+                    <a th:href="@{'/logout'}" class="btn btn-danger">Logout</a>
+                    <form class="d-flex" th:action="@{/searchPizza}" method="GET">
+                        <div class="input-group">
                             <input type="text" name="pizzas" id="pizzas" class="form-control" placeholder="Che pizza vuoi cercare?" aria-label="Cerca pizza">
                             <button type="submit" class="btn btn-primary">Cerca</button>
                         </div>

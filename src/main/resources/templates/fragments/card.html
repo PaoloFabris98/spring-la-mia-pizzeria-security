@@ -29,7 +29,7 @@
                                 <th>Descrizione</th>
                                 <th>Prezzo</th>
                                 <th>Allergeni</th>
-                                <th>Azioni</th>
+                                <th sec:authorize="hasAuthority('ADMIN')">Azioni</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +52,7 @@
                                     )}"></div>
                                     </div>
                                 </td>
-                                <td>
+                                <td sec:authorize="hasAuthority('ADMIN')">
                                     <div class="d-flex gap-2">
 
                                         <!--<div
@@ -60,7 +60,7 @@
                                         </div>
                                         -->
                                         <div
-                                            th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}">
+                                            th:insert="~{fragments/fragments :: buttons('/pizza', ${pizza.getNome()})}" >
                                         </div>
                                         <div
                                             th:insert="~{fragments/fragments :: buttonEdit('/edit/' + ${pizza.getId()})}">

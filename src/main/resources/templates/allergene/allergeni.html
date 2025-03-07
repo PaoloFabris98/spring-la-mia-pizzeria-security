@@ -29,13 +29,13 @@
                             <thead class="bg-primary text-white">
                                 <tr>
                                     <th class="py-3">Nome Allergeni</th>
-                                    <th class="py-3" style="width: 100px;">Azioni</th>
+                                    <th class="py-3" style="width: 100px;" sec:authorize="hasAuthority('ADMIN')">Azioni</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-light">
                                 <tr th:each="allergene : ${allergeni}">
                                     <td th:text="${allergene.getNome()}"></td>
-                                    <td style="width: 500px;">
+                                    <td style="width: 500px;" sec:authorize="hasAuthority('ADMIN')">
                                         <div class="d-flex justify-content-center align-items-center gap-2">
                                             <div th:insert="~{fragments/fragments :: editAllergene('/editAllergene/' + ${allergene.getId()})}"></div>
                                             
