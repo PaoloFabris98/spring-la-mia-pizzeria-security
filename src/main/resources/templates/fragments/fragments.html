@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <a th:fragment="buttons(link, params)" th:href="@{${link}(query=${params})}"
+        class="btn btn-primary w-100 d-flex justify-content-center">
+        Visualizza
+    </a>
+    <a th:fragment="button(link)" th:href="@{${link}}"
+        class="btn btn-outline-secondary w-100 d-flex justify-content-center">
+        Home
+    </a>
+    <a th:fragment="buttonEdit(link)" th:href="@{${link}}" class="btn btn-success w-100 d-flex justify-content-center">
+        Edit
+    </a>
+    <a th:fragment="aggiungiOfferta(link)" th:href="@{${link}}" class="btn btn-warning w-100 d-flex justify-content-center">
+        Edit
+    </a>
+    <a th:fragment="ingredienti(link)" th:href="@{${link}}" class="btn btn-warning w-100 d-flex justify-content-center">
+        Edit
+    </a>
+    <a th:fragment="editAllergene(link)" th:href="@{${link}}" class="btn btn-warning w-100 d-flex justify-content-center">
+        Edit
+    </a>
+</body>
+
+</html>

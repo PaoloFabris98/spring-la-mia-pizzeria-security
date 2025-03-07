@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/ingredienti.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/stile.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/card.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+
+<body class="bg-dark">
+    <div class=" bg-white" style="background-image: url('/imgs/sfondo/background.jpg'); background-size: cover;">
+        <div>
+            <div class="container-fluid px-4">
+                <div class="m-0 p-3">
+                    <div class="p-3 bg-dark text-white">
+                        <div th:insert="~{fragments/navbar :: navBar}"></div>
+                        <div th:if="${message != null && messageClass != null}">
+                            <div class="alert text-center" th:classappend="${messageClass}">
+                                <p th:text="${message}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive w-100 mt-4">
+                        <table class="table table-bordered table-hover text-center shadow-lg rounded">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th class="py-3">Nome Allergeni</th>
+                                    <th class="py-3" style="width: 100px;">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-light">
+                                <tr th:each="allergene : ${allergeni}">
+                                    <td th:text="${allergene.getNome()}"></td>
+                                    <td style="width: 500px;">
+                                        <div class="d-flex justify-content-center align-items-center gap-2">
+                                            <div th:insert="~{fragments/fragments :: editAllergene('/editAllergene/' + ${allergene.getId()})}"></div>
+                                            
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                th:data-bs-target="'#delete-modal-' + ${allergene.getId()}">
+                                                Delete
+                                            </button>
+                            
+                                            <div class="modal fade" th:id="'delete-modal-' + ${allergene.getId()}" tabindex="-1">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Conferma Eliminazione</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Sei sicuro di voler cancellare l'ingrediente:
+                                                                <strong th:text="${allergene.getNome()}"></strong>?
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                                Annulla
+                                                            </button>
+                                                            <form th:action="@{/cancella_allergene/{id}(id=${allergene.getId()})}" method="post">
+                                                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

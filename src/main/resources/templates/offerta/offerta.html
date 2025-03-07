@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/stile.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/card.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+
+<body class="bg-dark">
+    <div class="container" style="background-image: url('/imgs/sfondo/background.jpg'); background-size: cover;">
+        <div class="p-3 bg-dark text-white">
+            <div th:insert="~{fragments/navbar :: navBar}"></div>
+        </div>
+        <h1 th:text="${offerta.pizza}"></h1>
+        <div>
+            <form th:action="@{/creaOfferta/{id}(id=${offerta.pizza.Id})}" method="post" id="addPizza-form" class="bg-dark text-white container">
+                <input type="hidden" th:field="${offerta.pizza}">
+
+                <div class="m-3 p-2">
+                    <label for="Sconto" class="form-label">Sconto</label>
+                    <input id="Sconto" class="form-control" type="number" rows="4" th:field="${offerta.fixedDiscount}" placeholder="Descrivi la tua pizza" th:errorClass="is-invalid">
+                </div>
+                <div class="m-3 p-2">
+                    <label for="inizioOfferta" class="form-label">Inizio Offerta</label>
+                    <input id="inizioOfferta" class="form-control" type="date" rows="4" th:field="${offerta.discountStart}" placeholder="Descrivi la tua pizza" th:errorClass="is-invalid">
+                </div>
+                <div class="m-3 p-2">
+                    <label for="fineOfferta" class="form-label">Fine Offerta</label>
+                    <input id="fineOfferta" class="form-control" type="date" rows="4" th:field="${offerta.discountEnd}" placeholder="Descrivi la tua pizza" th:errorClass="is-invalid">
+                </div>
+                <div class="m-3 p-2">
+                    <label for="Descrizione" class="form-label">Descrizione</label>
+                    <textarea id="Descrizione" class="form-control" rows="4" th:field="${offerta.descrizione}" placeholder="Descrivi la tua pizza" th:errorClass="is-invalid"></textarea>
+                </div>
+                
+
+                <input type="submit" value="Aggiungi Pizza" class="btn btn-primary m-3 p-2">
+                <input type="reset" value="Reset" class="btn btn-warning m-3 p-2">
+            </form>
+        </div>
+    </div>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+    <!--JS-->
+    <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
