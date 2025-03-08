@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/stile.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/card.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+
+<body class="bg-dark">
+    <div class=" bg-white" style="background-image: url('/imgs/sfondo/background.jpg'); background-size: cover;"
+        th:object="${ingrediente}">
+        <div>
+            <div class="container-fluid px-4">
+                <div class="m-0 p-3">
+                    <div class="p-3 bg-dark text-white">
+                        <div th:insert="~{fragments/navbar :: navBar}"></div>
+                        <div th:if="${message != null && messageClass != null}">
+                            <div class="alert text-center" th:classappend="${messageClass}">
+                                <p th:text="${message}"></p>
+                            </div>
+                        </div>
+                        <div>
+                            <form th:action="@{/modificaIngrediente/{id}(id=${ingrediente.id})}" method="post"
+                                th:object="${ingrediente}" id="formIngredienti" class="bg-dark text-white">
+                                <div class="m-3 p-2">
+                                    <label for="Nome" class="form-label">Nome Ingrediente</label>
+                                    <input class="form-control" type="text" id="Nome" th:field="*{nome}"
+                                        placeholder="Inserisci il nome della pizza" th:errorClass="is-invalid">
+                                    <div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
+                                        <ul>
+                                            <li th:each="error: ${#fields.errors('nome')}" th:text="${error}"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="m-3 p-2">
+                                    <label class="form-label">Allergeni</label>
+                                    <div class="row">
+                                        <div th:each="allergene : ${allergeni}" class="col-md-3 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" th:field="*{allergeni}"
+                                                    th:value="${allergene.id}">
+                                                <label class="form-check-label" th:for="'allergene_' + ${allergene.id}"
+                                                    th:text="${allergene.nome}">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <input type="submit" value="Modifica Pizza" class="btn btn-primary m-3 p-2">
+                                <input type="reset" value="Reset" class="btn btn-warning m-3 p-2">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+    <!--JS-->
+    <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

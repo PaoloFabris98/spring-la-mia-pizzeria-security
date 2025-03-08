@@ -54,15 +54,21 @@ public class Ingrediente {
         this.nome = nome;
     }
 
-    /*
-     * public List<Pizza> getPizze() {
-     * return this.pizze;
-     * }
-     * 
-     * public void setPizze(List<Pizza> pizze) {
-     * this.pizze = pizze;
-     * }
-     */
+    public List<Pizza> getPizze() {
+        return this.pizze;
+    }
+
+    public void setPizze(List<Pizza> pizze) {
+        this.pizze = pizze;
+    }
+
+    public List<Allergene> getAllergeni() {
+        return this.allergeni;
+    }
+
+    public void setAllergeni(List<Allergene> allergeni) {
+        this.allergeni = allergeni;
+    }
 
     @Override
     public String toString() {
