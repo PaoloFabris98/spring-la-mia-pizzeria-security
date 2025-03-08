@@ -2,8 +2,6 @@ package com.example.spring_la_mia_pizzeria_security.model;
 
 import java.util.Set;
 
-import org.hibernate.annotations.ManyToAny;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
