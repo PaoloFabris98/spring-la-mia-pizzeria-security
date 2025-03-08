@@ -28,7 +28,7 @@
                                 <th>Nome</th>
                                 <th>Descrizione</th>
                                 <th>Prezzo</th>
-                                <th>Allergeni</th>
+                                <th class="allergeni-col">Allergeni</th>
                                 <th sec:authorize="hasAuthority('ADMIN')">Azioni</th>
                             </tr>
                         </thead>
@@ -40,6 +40,8 @@
                                 <td class="small">
                                     <div class="text-center">
                                         <h6>Allergeni</h6>
+                                    </div>
+                                    <div class="">
                                         <div th:insert="~{fragments/allergeni :: allergeni(${pizza.getIngredienti()})}"></div>
                                     </div>
                                 </td>

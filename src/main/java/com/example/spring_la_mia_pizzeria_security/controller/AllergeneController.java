@@ -60,6 +60,22 @@ public class AllergeneController {
         return "allergene/editAllergene";
     }
 
+    @PostMapping("/editAllergene/{id}")
+    public String editAllergene(@Valid @ModelAttribute("allergene") Allergene formAllergene,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            return "allergene/editAllergene";
+        }
+
+        allergeniService.creaAllergene(formAllergene);
+        redirectAttributes.addFlashAttribute("message", "Allergene modificato con successo");
+        redirectAttributes.addFlashAttribute("messageClass", "alert-success");
+
+        return "redirect:/";
+    }
+
     @PostMapping("/cancella_allergene/{id}")
     public String deleteAllergene(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         Allergene allergene = allergeniService.getById(id);
