@@ -1,15 +1,14 @@
 package com.example.spring_la_mia_pizzeria_security.model;
 
-import java.util.Set;
+import java.time.LocalDate;
 
+import com.example.spring_la_mia_pizzeria_security.utilityFunction.EmailValidator;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -26,9 +25,25 @@ public class User {
     @NotBlank(message = "La password dell'utente non può essere vuota")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "role_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @NotBlank(message = "La mail non può essere vuota")
+    private String email;
+
+    @NotBlank(message = "L'età non può essere vuota")
+    @Column(name = "eta", nullable = true)
+    private LocalDate età;
+
+    @NotBlank(message = "L'abilitazione dell'utente non può essere vuota")
+    private Boolean enabled = true;
+
+    public User() {
+    }
+
+    public User(Integer id, String username, String password, String email, LocalDate età) {
+        setUsername(username);
+        setPassword(password);
+        setEmail(email);
+        setEtà(età);
+    }
 
     public Integer getId() {
         return this.id;
@@ -54,12 +69,33 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return this.roles;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setEmail(String email) {
+        this.email = EmailValidator.emailValidator(email);
+        ;
+    }
+
+    public LocalDate getEtà() {
+        return this.età;
+    }
+
+    public void setEtà(LocalDate età) {
+        this.età = età;
+    }
+
+    public Boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

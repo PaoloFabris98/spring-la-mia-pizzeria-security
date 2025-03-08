@@ -2,17 +2,22 @@ package com.example.spring_la_mia_pizzeria_security.security;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.spring_la_mia_pizzeria_security.model.Role;
+import com.example.spring_la_mia_pizzeria_security.model.Authorities;
 import com.example.spring_la_mia_pizzeria_security.model.User;
+import com.example.spring_la_mia_pizzeria_security.repository.AuthoritiesRepository;
 
 public class DatabaseUserDetails implements UserDetails {
 
+    @Autowired
+    AuthoritiesRepository authoritiesList;
     private final Integer id;
     private final String username;
     private final String password;
@@ -23,8 +28,9 @@ public class DatabaseUserDetails implements UserDetails {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.authorities = new HashSet<GrantedAuthority>();
-        for (Role role : user.getRoles()) {
-            this.authorities.add(new SimpleGrantedAuthority(role.getNome()));
+        List<Authorities> userAuthorities = authoritiesList.findByName(username);
+        for (int i = 0; i < userAuthorities.size(); i++) {
+            this.authorities.add(new SimpleGrantedAuthority(userAuthorities.get(i).getAuthority()));
         }
     }
 
