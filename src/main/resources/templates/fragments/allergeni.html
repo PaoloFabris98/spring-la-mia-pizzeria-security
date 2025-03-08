@@ -10,16 +10,42 @@
 </head>
 
 <body>
-    <div th:fragment="allergeni(arachidi,crostacei,glutine,latte,sedano,sesamo,soia,uova)" class="d-flex justify-content-center">
-        <div th:if="${arachidi == true}"><img src="/imgs/allergeni/arachidi.png" style="width: 35px; height:auto"><img src="/imgs/allergeni/noci.png" style="width: 35px; height:auto"></div>
-        <div th:if="${crostacei == true}"><img src="/imgs/allergeni/crostacei.png" style="width: 35px; height:auto"><img src="/imgs/allergeni/pesce.png" style="width: 35px; height:auto"></div>
-        <div th:if="${glutine == true}"><img src="/imgs/allergeni/glutine.png" style="width: 35px; height:auto"></div>
-        <div th:if="${latte == true}"><img src="/imgs/allergeni/latte.png" style="width: 35px; height:auto"></div>
-        <div th:if="${sedano == true}"><img src="/imgs/allergeni/sedano.png" style="width: 35px; height:auto"></div>
-        <div th:if="${sesamo == true}"><img src="/imgs/allergeni/sesamo.png" style="width: 35px; height:auto"></div>
-        <div th:if="${soia == true}"><img src="/imgs/allergeni/soia.png" style="width: 35px; height:auto"></div>
-        <div th:if="${uova == true}"><img src="/imgs/allergeni/uova.png" style="width: 35px; height:auto"></div>
+    <div th:fragment="allergeni(ingredienti)" class="d-flex justify-content-center">
+        <div th:each="ingrediente : ${ingredienti}">
+            <div th:each="allergene : ${ingrediente.allergeni}">
+                <div th:if="${allergene.nome == 'Frutta a guscio'}">
+                    <img src="/imgs/allergeni/arachidi.png" style="width: 35px; height:auto">
+                    <img src="/imgs/allergeni/noci.png" style="width: 35px; height:auto">
+                </div>
+                <div th:if="${allergene.nome == 'Pesce e crostacei'}">
+                    <img src="/imgs/allergeni/crostacei.png" style="width: 35px; height:auto">
+                    <img src="/imgs/allergeni/pesce.png" style="width: 35px; height:auto">
+                </div>
+                <div th:if="${allergene.nome == 'Glutine'}">
+                    <img src="/imgs/allergeni/glutine.png" style="width: 35px; height:auto">
+                </div>
+                <div th:if="${allergene.nome == 'Lattosio'}">
+                    <img src="/imgs/allergeni/latte.png" style="width: 35px; height:auto">
+                </div>
+                <div th:if="${allergene.nome == 'Sedano'}">
+                    <img src="/imgs/allergeni/sedano.png" style="width: 35px; height:auto">
+                </div>
+                <div th:if="${allergene.nome == 'Sesamo'}">
+                    <img src="/imgs/allergeni/sesamo.png" style="width: 35px; height:auto">
+                </div>
+                <div th:if="${allergene.nome == 'Soia'}">
+                    <img src="/imgs/allergeni/soia.png" style="width: 35px; height:auto">
+                </div>
+                <div th:if="${allergene.nome == 'Uova'}">
+                    <img src="/imgs/allergeni/uova.png" style="width: 35px; height:auto">
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
+</div>
+
 
 </body>
 

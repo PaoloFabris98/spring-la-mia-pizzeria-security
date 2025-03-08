@@ -40,16 +40,7 @@
                                 <td class="small">
                                     <div class="text-center">
                                         <h6>Allergeni</h6>
-                                        <div th:insert="~{fragments/allergeni :: allergeni(
-                                        ${pizza.isFrutta_a_guscio()},
-                                        ${pizza.isPesce_e_crostacei()},
-                                        ${pizza.isGlutine()},
-                                        ${pizza.isLattosio()},
-                                        ${pizza.isSedano()},
-                                        ${pizza.isSesamo()},
-                                        ${pizza.isSoia()},
-                                        ${pizza.isUova()}
-                                    )}"></div>
+                                        <div th:insert="~{fragments/allergeni :: allergeni(${pizza.getIngredienti()})}"></div>
                                     </div>
                                 </td>
                                 <td sec:authorize="hasAuthority('ADMIN')">

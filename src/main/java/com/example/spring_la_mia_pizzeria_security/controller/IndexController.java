@@ -1,11 +1,16 @@
 package com.example.spring_la_mia_pizzeria_security.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.spring_la_mia_pizzeria_security.model.Pizza;
 import com.example.spring_la_mia_pizzeria_security.repository.PizzaRepository;
+import com.example.spring_la_mia_pizzeria_security.service.PizzaService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,14 +21,17 @@ public class IndexController {
     @Autowired
     private PizzaRepository pizzaRepository;
 
+    @Autowired
+    private PizzaService pizzaService;
+
     @GetMapping("/")
     public String index(Model model) {
         if (pizzaRepository.findAll().size() == 0) {
-            model.addAttribute("pizzas", pizzaRepository.findAll());
-            model.addAttribute("isValid", "false");
+            List<Pizza> pizzas = pizzaService.getAllPizzas();
+            model.addAttribute("pizzas", pizzas);
         } else {
-            model.addAttribute("pizzas", pizzaRepository.findAll());
-            model.addAttribute("isValid", "true");
+            List<Pizza> pizzas = pizzaService.getAllPizzas();
+            model.addAttribute("pizzas", pizzas);
         }
         ;
         return "index/index";

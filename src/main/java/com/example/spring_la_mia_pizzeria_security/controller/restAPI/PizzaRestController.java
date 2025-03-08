@@ -26,12 +26,6 @@ public class PizzaRestController {
     @Autowired
     PizzaService pizzaService;
 
-    @GetMapping
-    public List<Pizza> index() {
-        List<Pizza> pizze = pizzaService.findAll();
-        return pizze;
-    }
-
     @GetMapping("{id}")
     public Pizza get(@PathVariable Integer id) {
         Pizza pizza = pizzaService.findById(id).get();

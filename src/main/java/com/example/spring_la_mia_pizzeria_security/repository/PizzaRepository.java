@@ -10,4 +10,5 @@ import com.example.spring_la_mia_pizzeria_security.model.Pizza;
 @Repository
 public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
     public List<Pizza> findByNomeContaining(String name);
+
 }
