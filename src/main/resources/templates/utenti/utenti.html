@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/stile.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/card.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+
+</head>
+
+<body class=" bg-white" style="background-image: url('/imgs/sfondo/background.jpg'); background-size: cover;">
+
+    <div class="container-fluid px-4">
+        <div class="m-0 p-3">
+            <div class="p-3 bg-dark text-white">
+                <div th:insert="~{fragments/navbar :: navBar}"></div>
+                <div th:if="${message != null && messageClass != null}">
+                    <div class="alert text-center" th:classappend="${messageClass}">
+                        <p th:text="${message}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive w-100">
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>Data Iscrizione</th>
+                            <th>Anno di Nascita</th>
+                            <th sec:authorize="hasAuthority('ADMIN')">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="utente : ${utenti}">
+                            <td th:text="${utente.getId()}"></td>
+                            <td th:text="${utente.getUsername()}"></td>
+                            <td th:text="${utente.getId()}"></td>
+                            <td th:text="${utente.etàFormattata()}"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

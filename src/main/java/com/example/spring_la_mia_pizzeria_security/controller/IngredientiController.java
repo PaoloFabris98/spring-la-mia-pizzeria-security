@@ -1,7 +1,6 @@
 package com.example.spring_la_mia_pizzeria_security.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.validation.BindingResult;
 
 import com.example.spring_la_mia_pizzeria_security.model.Allergene;
 import com.example.spring_la_mia_pizzeria_security.model.Ingrediente;
-import com.example.spring_la_mia_pizzeria_security.model.Pizza;
 import com.example.spring_la_mia_pizzeria_security.service.AllergeniService;
 import com.example.spring_la_mia_pizzeria_security.service.IngredientiService;
 

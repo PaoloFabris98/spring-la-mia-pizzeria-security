@@ -1,14 +1,19 @@
 package com.example.spring_la_mia_pizzeria_security.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.cglib.core.Local;
 
 import com.example.spring_la_mia_pizzeria_security.utilityFunction.EmailValidator;
+import com.example.spring_la_mia_pizzeria_security.utilityFunction.EtàValidator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -25,10 +30,10 @@ public class User {
     @NotBlank(message = "La password dell'utente non può essere vuota")
     private String password;
 
-    @NotBlank(message = "La mail non può essere vuota")
+    private LocalDate dataIscrizione = LocalDate.now();
+
     private String email;
 
-    @NotBlank(message = "L'età non può essere vuota")
     @Column(name = "eta", nullable = true)
     private LocalDate età;
 
@@ -96,6 +101,22 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isEighteen() {
+        return EtàValidator.età(this.età);
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (this.dataIscrizione == null) {
+            this.dataIscrizione = LocalDate.now();
+        }
+    }
+
+    public String etàFormattata() {
+        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return this.getEtà().format(formatted);
     }
 
     @Override

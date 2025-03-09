@@ -1,5 +1,6 @@
 package com.example.spring_la_mia_pizzeria_security.security;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         }
         return new DatabaseUserDetails(userAttempt.get());
 
+    }
+
+    public List<User> findAll() {
+        return repository.findAll();
     }
 
 }

@@ -37,6 +37,11 @@ public class IndexController {
         return "index/index";
     }
 
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "index/accessDenied";
+    }
+
     @GetMapping("/contatti")
     public String contatti(Model model) {
         return "index/contatti";

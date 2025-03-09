@@ -4,11 +4,21 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class EtàValidator {
-    public static Boolean età(LocalDate i) throws IllegalArgumentException {
-        LocalDate timeNow = LocalDate.now();
-        if (Period.between(timeNow, i).getYears() < 18) {
-            return false;
+
+    public static Boolean età(LocalDate dataNascita) throws IllegalArgumentException {
+        if (dataNascita == null) {
+            throw new IllegalArgumentException("Data di nascita non valida.");
         }
-        return true;
+
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dataNascita, today);
+
+        if (period.getYears() > 18
+                || (period.getYears() == 18 && (today.getMonthValue() > dataNascita.getMonthValue() ||
+                        (today.getMonthValue() == dataNascita.getMonthValue()
+                                && today.getDayOfMonth() >= dataNascita.getDayOfMonth())))) {
+            return true;
+        }
+        return false;
     }
 }
