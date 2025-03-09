@@ -19,6 +19,7 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/webjars/**", "/css/**", "/js/**", "/images/**").permitAll()
                 .requestMatchers("/creaPizza", "/creaOfferta/**", "/edit/**", "/creaIngrediente", "/creaAllergene",
                         "/editAllergene/**")
                 .hasAuthority("ADMIN")
@@ -27,8 +28,14 @@ public class SecurityConfiguration {
                         "/cancella_allergene/**")
                 .hasAuthority("ADMIN")
                 .requestMatchers("/allergeni", "/pizza", "/**", "/vediIngredienti").hasAnyAuthority("ADMIN", "USER"))
-                .formLogin(form -> form.permitAll())
-                .logout(logout -> logout.permitAll())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll())
                 .exceptionHandling(ex -> ex.accessDeniedPage("/access-denied"));
 
         return http.build();
