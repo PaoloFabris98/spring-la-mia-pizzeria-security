@@ -103,6 +103,14 @@ public class User {
         this.enabled = enabled;
     }
 
+    public LocalDate getDataIscrizione() {
+        return this.dataIscrizione;
+    }
+
+    public void setDataIscrizione() {
+        this.dataIscrizione = LocalDate.now();
+    }
+
     public boolean isEighteen() {
         return EtàValidator.età(this.età);
     }

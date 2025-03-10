@@ -20,14 +20,17 @@ public class SecurityConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/webjars/**", "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/registrazione").permitAll()
                 .requestMatchers("/creaPizza", "/creaOfferta/**", "/edit/**", "/creaIngrediente", "/creaAllergene",
-                        "/editAllergene/**")
+                        "/editAllergene/**", "/utenti")
                 .hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/creaPizza", "/creaOfferta/**", "/edit/**", "/delete/**",
                         "/creaIngrediente", "/cancella_ingrediente/**", "/creaAllergene", "/editAllergene/**",
                         "/cancella_allergene/**")
                 .hasAuthority("ADMIN")
-                .requestMatchers("/allergeni", "/pizza", "/**", "/vediIngredienti").hasAnyAuthority("ADMIN", "USER"))
+                .requestMatchers("/allergeni", "/pizza", "/vediIngredienti")
+                .hasAnyAuthority("ADMIN", "USER")
+                .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
@@ -53,12 +56,10 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    @SuppressWarnings("deprecation")
     DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
 }

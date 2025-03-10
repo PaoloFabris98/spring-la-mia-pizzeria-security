@@ -34,7 +34,7 @@
                         <a th:href="@{'/allergeni'}" class="text-white">Allergeni</a>
                     </h6>
                     <h6 class="navbar-links m-0 me-3">
-                        <a th:href="@{'/utenti'}" class="text-white">Utenti</a>
+                        <a th:href="@{'/utenti'}" class="text-white" sec:authorize="hasAuthority('ADMIN')">Utenti</a>
                     </h6>
                 </div>
                 

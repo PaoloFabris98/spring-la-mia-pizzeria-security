@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/stile.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/card.css}" />
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+
+<body class="bg-dark">
+    <div class="bg-white" style="background-image: url('/imgs/sfondo/background.jpg'); background-size: cover;">
+        <div>
+            <div class="container-fluid px-4">
+                <div class="m-0 p-3">
+                        <div th:if="${message != null && messageClass != null}">
+                            <div class="alert text-center" th:classappend="${messageClass}">
+                                <p th:text="${message}"></p>
+                            </div>
+                        </div>
+                    <form th:action="@{/registrazione}" method="post" id="registration-form" th:object="${user}"
+                        class="bg-dark text-white container">
+                        <div class="m-3 p-2">
+                            <label for="username" class="form-label">Username</label>
+                            <input class="form-control" type="text" id="username" th:field="*{username}"
+                                placeholder="Inserisci il tuo username" th:errorClass="is-invalid">
+                            <div th:if="${#fields.hasErrors('username')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('username')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="m-3 p-2">
+                            <label for="password" class="form-label">Password</label>
+                            <input class="form-control" type="password" id="password" th:field="*{password}"
+                                placeholder="Inserisci la tua password" th:errorClass="is-invalid">
+                            <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('password')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="m-3 p-2">
+                            <label for="email" class="form-label">Email</label>
+                            <input class="form-control" type="email" id="email" th:field="*{email}"
+                                placeholder="Inserisci la tua email" th:errorClass="is-invalid">
+                            <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('email')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="m-3 p-2">
+                            <label for="eta" class="form-label">Data di Nascita</label>
+                            <input class="form-control" type="date" id="eta" th:field="*{età}" th:errorClass="is-invalid">
+                            <div th:if="${#fields.hasErrors('età')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('età')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Registrati</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div th:insert="~{fragments/footer :: footer}"></div>
+            <!--JS-->
+            <script th:src="@{/js/app.js}"></script>
+            <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        </div>
+    </div>
+</body>
+
+</html>
